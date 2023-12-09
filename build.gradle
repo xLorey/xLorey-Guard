@@ -22,8 +22,6 @@ repositories {
  * Plugin Dependencies
  */
 dependencies {
-    implementation 'org.projectlombok:lombok:1.18.28'
-
     /**
      * Flux Loader - connects only in compileOnly format
      */
