@@ -1,0 +1,26 @@
+{
+  "name": "xLorey Guard",
+  "description": "Custom server protection system",
+  "id": "xlorey-guard",
+  "version": "${version}",
+  "authors": [
+    "xLorey Team"
+  ],
+  "contact": [
+    "xlorey@mail.ru"
+  ],
+  "license": "MIT",
+  "icon": "icon.png",
+  "entrypoints": {
+    "client": [
+      ""
+    ],
+    "server": [
+      "io.xlorey.xLoreyGuard.server.ServerPlugin"
+    ]
+  },
+  "dependencies": {
+    "project-zomboid": "=41.78.16",
+    "flux-loader": ">=0.5.0"
+  }
+}
