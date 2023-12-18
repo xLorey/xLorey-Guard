@@ -29,7 +29,7 @@ This tool is a Flux server protection plugin. Contains a server anti-cheat that 
 
 # How to use
 
-- Download and install the latest [FluxLoader](https://github.com/xLorey/FluxLoader-PZ) version specified in the plugin requirements
+- Download and install the latest [FluxLoader](https://github.com/xLorey/FluxLoader) version specified in the plugin requirements
 - Download the latest version of the plugin from the release page
 - Move the downloaded file to the `plugins` folder in the server directory
 
