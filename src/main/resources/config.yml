@@ -1,0 +1,98 @@
+# Enabling player inventory synchronization with the server (there is no proper implementation of this feature yet, so there is no point in including)
+syncPlayerInventory: false
+# Should anti-cheat block unfair play by administrators
+antiCheatWorksOnAdmins: false
+# Log client-side commands that are sent through code
+logClientCommand: true
+# Log the placement of game objects on the map
+logPlaceObject: true
+# Log the player's experience gain
+logAddXp: true
+# Choice of punishment for certain types of cheats
+#  0 - nothing,
+#  1 - only logging,
+#  2 - kick from the server + logging,
+#  3 - blocking by IP/SteamID + logging).
+antiCheatPunishment:
+  # Punishment for using in-game cheats
+  inGameCheats: 2
+  # Punishment for attempting to spread fire
+  fireCheats: 2
+  # Punishment for trying to use the object drawing tool
+  brushTool: 2
+  # Punishment for using cheating commands (for example, for cars)
+  commandCheats: 2
+  # Punishment for attempting to manipulate someone else's inventory
+  inventoryManipulations: 2
+  # Punishment for trying to use level/experience cheats
+  expCheats: 2
+# Enabling certain types of anti-cheat
+# true - anti-cheat is enabled
+# false - anti-cheat is disabled
+antiCheatType:
+  # Prohibition on the use of in-game cheats (godmode, noclip, etc.)
+  inGameCheats: true
+  # Blocking fire creation (with server setting disabled)
+  fireCheats: true
+  # Prohibition on the use of game object drawing tools
+  brushTool: true
+  # Prohibition of using cheat commands (for example, for cars)
+  commandCheats: true
+  # Prohibition on manipulating other people's inventory
+  inventoryManipulations: true
+  # Prohibition on issuing level/experience
+  expCheats: true
+# Fine-tuning anti-cheat sensitivity
+antiCheatSettings:
+  # Allowed distance for placing objects from the player (without cheats it is impossible to place more than 2-3 cells)
+  # Value is calculated in cells
+  brushToolDistance: 3
+  # Allowed time between placing objects on the map (if user skills reduce the time for placement, you need to change this value)
+  # The value is calculated in milliseconds
+  brushToolTimePlace: 1500
+  # Acceptable percentage of difference between new and old player experience level (recommended 60% - 0.6)
+  acceptableXPChangePercentage: 0.6
+  # Blacklist of sprites of objects to be placed on the map (for example, a water sprite cannot be placed in an honest way)
+  # The name of the sprite is indicated, not the object itself
+  blackListSpriteObjects:
+    # Below is a list of water tiles
+    - blends_natural_02_0
+    - blends_natural_02_1
+    - blends_natural_02_2
+    - blends_natural_02_3
+    - blends_natural_02_4
+    - blends_natural_02_5
+    - blends_natural_02_6
+    - blends_natural_02_7
+    - blends_natural_02_8
+    - blends_natural_02_9
+    - blends_natural_02_10
+    - blends_natural_02_11
+    - blends_natural_02_12
+    - blends_natural_02_13
+    - blends_natural_02_14
+    - blends_natural_02_15
+# Nicknames of players on whom the anti-cheat will not work (white list)
+whiteListUsername:
+  - admin
+# Groups of user rights for which anti-cheat will not work (white list)
+whiteListGroup:
+  - admin
+  - moderator
+# IPs for which anti-cheat will not work (white list)
+whiteListIP:
+  - 0.0.0.1
+# Translation of messages during server protection operation
+translation:
+  # Text that is displayed to the player and logs if in-game cheats are used
+  inGameCheats: Attempting to use in-game cheats
+  # Text that is displayed to the player and logs if fire cheats are used
+  fireCheats: Attempting to use fire cheats
+  # Text that is displayed to the player and logs if brush tool are used
+  brushTool: Attempting to use game object drawing tools
+  # Text that is displayed to the player and logs if command cheats are used
+  commandCheats: Attempting to use cheat commands
+  # Text that is displayed to the player and logs if there is manipulation with someone else's inventory
+  inventoryManipulations: Attempting to manipulate the inventory of other players
+  # Text that is displayed to the player and logs if exp/level cheats are used
+  expCheats: Attempting to use cheats for experience/level

@@ -9,7 +9,7 @@ plugins {
  * Project group and version
  */
 group = 'io.xlorey.xLoreyGuard'
-version = '0.1.0'
+version = '0.2.0'
 
 /**
  * Repositories used
@@ -25,11 +25,7 @@ dependencies {
     /**
      * Flux Loader - connects only in compileOnly format
      */
-    compileOnly files("libs/FluxLoader-0.5.0.jar")
-    /**
-     * Zombie - 'zombie' folder from the game directory, packed in a jar archive. Connects only in compileOnly format
-     */
-    compileOnly files("libs/zombie.jar")
+    compileOnly files("libs/FluxLoader-0.6.1.jar")
 }
 
 /**
@@ -38,7 +34,7 @@ dependencies {
 processResources {
     inputs.property "version", project.version
 
-    filesMatching("plugin.json") {
+    filesMatching("metadata.json") {
         expand "version": project.version
     }
 }
@@ -47,8 +43,10 @@ processResources {
  * Build the project in a jar archive. The source file will be created in the 'build' folder
  */
 jar {
+    String buildDir = System.getenv('BUILD_DIR') ?: 'build'
+
     archiveFileName = "${rootProject.name}-${version}.jar"
-    destinationDirectory = file('build')
+    destinationDirectory = file(buildDir)
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
 
     from {
