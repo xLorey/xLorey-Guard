@@ -4,7 +4,7 @@
 
 <p align="center">
     <img alt="PZ Version" src="https://img.shields.io/badge/Project_Zomboid-v41.78.76-blue">
-    <img alt="FluxLoader" src="https://img.shields.io/badge/Flux_Loader-=v0.6.1-yellow">
+    <img alt="FluxLoader" src="https://img.shields.io/badge/Flux_Loader->=0.6.2-yellow">
     <img alt="Java version" src="https://img.shields.io/badge/Java-17-orange">
     <a href="https://discord.gg/BwSuTdEGJ4" style="text-decoration: none;">
          <img alt="Discord" src="https://img.shields.io/discord/1174285070761197599.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2">

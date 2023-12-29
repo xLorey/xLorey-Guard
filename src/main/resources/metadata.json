@@ -21,6 +21,6 @@
   "controlsEntrypoint": "",
   "dependencies": {
     "project-zomboid": "=41.78.16",
-    "flux-loader": "=0.6.2"
+    "flux-loader": ">=0.6.2"
   }
 }
