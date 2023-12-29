@@ -3,7 +3,7 @@
 </div>
 
 <p align="center">
-    <img alt="PZ Version" src="https://img.shields.io/badge/Project_Zomboid-v41.78.76-blue">
+    <img alt="PZ Version" src="https://img.shields.io/badge/Project_Zomboid-v41.78.16-blue">
     <img alt="FluxLoader" src="https://img.shields.io/badge/Flux_Loader->=0.6.2-yellow">
     <img alt="Java version" src="https://img.shields.io/badge/Java-17-orange">
     <a href="https://discord.gg/BwSuTdEGJ4" style="text-decoration: none;">
