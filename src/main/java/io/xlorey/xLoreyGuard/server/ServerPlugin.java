@@ -1,8 +1,11 @@
 package io.xlorey.xLoreyGuard.server;
 
-import io.xlorey.FluxLoader.plugin.Configuration;
-import io.xlorey.FluxLoader.plugin.Plugin;
-import io.xlorey.FluxLoader.shared.EventManager;
+import io.xlorey.fluxloader.plugin.Configuration;
+import io.xlorey.fluxloader.plugin.Plugin;
+import io.xlorey.fluxloader.shared.EventManager;
+import io.xlorey.xLoreyGuard.server.handlers.OnAddIncomingHandler;
+import io.xlorey.xLoreyGuard.server.handlers.OnChatMessageProcessedHandler;
+import io.xlorey.xLoreyGuard.server.handlers.OnServerInitializeHandler;
 
 /**
  * Implementing a server plugin
@@ -12,7 +15,6 @@ public class ServerPlugin extends Plugin {
      * Plugin entry point instance
      */
     private static ServerPlugin instance;
-
     /**
      * Plugin entry point. Called when a plugin is loaded via FluxLoader.
      */
@@ -22,7 +24,9 @@ public class ServerPlugin extends Plugin {
 
         saveDefaultConfig();
 
-        EventManager.subscribe(new EventHandler());
+        EventManager.subscribe(new OnAddIncomingHandler());
+        EventManager.subscribe(new OnChatMessageProcessedHandler());
+        EventManager.subscribe(new OnServerInitializeHandler());
     }
 
     /**

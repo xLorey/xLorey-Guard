@@ -9,7 +9,7 @@ plugins {
  * Project group and version
  */
 group = 'io.xlorey.xLoreyGuard'
-version = '0.2.0'
+version = '0.3.0'
 
 /**
  * Repositories used
@@ -25,7 +25,9 @@ dependencies {
     /**
      * Flux Loader - connects only in compileOnly format
      */
-    compileOnly files("libs/FluxLoader-0.6.1.jar")
+    compileOnly files("libs/FluxLoader-0.8.0.jar")
+    compileOnly files("libs/zombie.jar")
+    compileOnly files("libs/fmod.jar")
 }
 
 /**

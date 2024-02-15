@@ -1,7 +1,7 @@
 package io.xlorey.xLoreyGuard.server.utils;
 
-import io.xlorey.FluxLoader.server.api.PlayerUtils;
-import io.xlorey.FluxLoader.utils.Logger;
+import io.xlorey.fluxloader.server.api.PlayerUtils;
+import io.xlorey.fluxloader.utils.Logger;
 import zombie.GameWindow;
 import zombie.characters.IsoPlayer;
 import zombie.core.network.ByteBufferWriter;

@@ -1,17 +1,18 @@
 package io.xlorey.xLoreyGuard.server.utils;
 
-import io.xlorey.FluxLoader.server.api.IncomingPacket;
-import io.xlorey.FluxLoader.server.api.PlayerUtils;
-import io.xlorey.FluxLoader.utils.Logger;
+import io.xlorey.fluxloader.server.api.PlayerUtils;
+import io.xlorey.fluxloader.utils.Logger;
 import io.xlorey.xLoreyGuard.server.ServerPlugin;
 import io.xlorey.xLoreyGuard.server.enums.PunishType;
 import zombie.characters.IsoPlayer;
 import zombie.iso.IsoObject;
 
-import java.nio.ByteBuffer;
-
 /**
- * A set of basic tools for various tasks
+ * Author: Deknil
+ * Date: 15.02.2024
+ * GitHub: <a href="https://github.com/Deknil">https://github.com/Deknil</a>
+ * Description: A set of basic tools for various tasks
+ * <p> xLoreyGuard © 2024. All rights reserved. </p>
  */
 public class GeneralTools {
     /**
@@ -22,22 +23,9 @@ public class GeneralTools {
      * @param reason The reason for the penalty, represented as a string.
      */
     public static void punishPlayer(int punishType, IsoPlayer player, String reason){
-        punishPlayer(punishType, player, reason, null);
-    }
-
-    /**
-     * Punishes the player according to the specified punishment type.
-     * @param punishType The punishment type, represented as an integer value.
-     *                   Must match the ordinal value of the {@link PunishType} enumeration.
-     * @param player The player ({@link IsoPlayer}) to whom the penalty is assigned.
-     * @param reason The reason for the penalty, represented as a string.
-     * @param packetData information about the received packet to block it
-     */
-    public static void punishPlayer(int punishType, IsoPlayer player, String reason, ByteBuffer packetData){
         if (punishType == PunishType.NOTHING.ordinal()) return;
 
         Logger.print(String.format("AC > Player %s | %s", player.getDisplayName(), reason));
-        if (packetData != null) IncomingPacket.blockPacket(packetData);
 
         if (punishType == PunishType.LOGGING.ordinal()) {
             return;
@@ -48,19 +36,17 @@ public class GeneralTools {
         };
 
         if (punishType == PunishType.BAN.ordinal()) {
-            PlayerUtils.banPlayer(player, reason);
+            PlayerUtils.banPlayer(player, reason, false, false);
         };
     }
 
     /**
-     * Checks if the packet is authorized from the player.
+     * Checks if the player has rights to ignore anti-cheat
      * @param player The player whose package is being checked.
      * @return true if the package is authorized, false otherwise.
      */
-    public static boolean isAuthorizedPacket(IsoPlayer player){
-        if (ServerPlugin.getDefaultConfig().getBoolean("antiCheatWorksOnAdmins")) return false;
-
-        for (Object whiteListedUsername : ServerPlugin.getDefaultConfig().getList("whiteListUsername")) {
+    public static boolean isPlayerHasRights(IsoPlayer player){
+        for (Object whiteListedUsername : ServerPlugin.getDefaultConfig().getList("settings.general.whiteListUsername")) {
             String userName = (String) whiteListedUsername;
 
             if (userName == null || userName.isEmpty()) continue;
@@ -68,20 +54,12 @@ public class GeneralTools {
             if(userName.equalsIgnoreCase(player.getUsername())) return true;
         }
 
-        for (Object whiteListedGroup : ServerPlugin.getDefaultConfig().getList("whiteListGroup")) {
+        for (Object whiteListedGroup : ServerPlugin.getDefaultConfig().getList("settings.general.whiteListGroup")) {
             String group = (String) whiteListedGroup;
 
             if (group == null || group.isEmpty()) continue;
 
             if(group.equalsIgnoreCase(player.getAccessLevel())) return true;
-        }
-
-        for (Object whiteListedIP : ServerPlugin.getDefaultConfig().getList("whiteListIP")) {
-            String ipAddress = (String) whiteListedIP;
-
-            if (ipAddress == null || ipAddress.isEmpty()) continue;
-
-            if(ipAddress.equalsIgnoreCase(PlayerUtils.getPlayerIP(player))) return true;
         }
 
         return false;
