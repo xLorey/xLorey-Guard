@@ -1,92 +1,120 @@
-# Server protection settings
-settings:
-  # General settings for all anti-cheats
-  general:
-    isLogClientCommand: true
-    # Nicknames of players on whom the anti-cheat will not work (white list)
-    whiteListUsername:
-      - admin
-    # Groups of user rights for which anti-cheat will not work (white list)
-    whiteListGroup:
-      - admin
-      - moderator
-  # Anti-cheat that prevents the use of BrushTool
-  antiBrushTool:
-    # Status of this anti-cheat: enabled or disabled
-    isEnable: true
-    # Text that will be displayed to the player when receiving a punishment
-    punishText: "Suspicious use of BrushTool"
-    # Choice of punishment for certain types of cheats
-    #  0 - nothing,
-    #  1 - only logging,
-    #  2 - kick from the server + logging,
-    #  3 - blocking by IP/SteamID + logging).
-    punishType: 2
-    # Allowed time between placing objects on the map (if user skills reduce the time for placement, you need to change this value)
-    # The value is calculated in milliseconds
-    placeTimeLimit: 1500
-    # Minimum distance in cells from which the anti-cheat starts working
-    minDistance: 4
-    # Maximum distance in cells after which the anti-cheat will not work
-    maxDistance: 70
-    # The maximum number of objects that a player can install instantly before the anti-cheat is triggered
-    # For example, placing a bed of 4 squares causes it to be checked 4 times in one instant
-    maxObjectPlace: 4
-    # Blacklist of sprites of objects to be placed on the map (for example, a water sprite cannot be placed in an honest way)
-    # The name of the sprite is indicated, not the object itself
-    blackListSprite:
-      # Below is a list of water tiles
-      - "blends_natural_02_0"
-      - "blends_natural_02_1"
-      - "blends_natural_02_2"
-      - "blends_natural_02_3"
-      - "blends_natural_02_4"
-      - "blends_natural_02_5"
-      - "blends_natural_02_6"
-      - "blends_natural_02_7"
-      - "blends_natural_02_8"
-      - "blends_natural_02_9"
-      - "blends_natural_02_10"
-      - "blends_natural_02_11"
-      - "blends_natural_02_12"
-      - "blends_natural_02_13"
-      - "blends_natural_02_14"
-      - "blends_natural_02_15"
-  # Anti-cheat that prevents the use of Vehicle Cheat
-  vehicleAntiCheat:
-    # Status of this anti-cheat: enabled or disabled
-    isEnable: true
-    # Text that will be displayed to the player when receiving a punishment
-    punishText: "Suspicious use of Vehicle Cheat"
-    # Choice of punishment for certain types of cheats
-    #  0 - nothing,
-    #  1 - only logging,
-    #  2 - kick from the server + logging,
-    #  3 - blocking by IP/SteamID + logging).
-    punishType: 3
-  # Anti-cheat that prevents the use of Extra Info
-  extraInfoAntiCheat:
-    # Status of this anti-cheat: enabled or disabled
-    isEnable: true
-    # Text that will be displayed to the player when receiving a punishment
-    punishText: "Suspicious use of Extra Info"
-    # Choice of punishment for certain types of cheats
-    #  0 - nothing,
-    #  1 - only logging,
-    #  2 - kick from the server + logging,
-    #  3 - blocking by IP/SteamID + logging).
-    punishType: 3
-  # Anti-cheat that prevents the use of Skills Cheat
-  skillAntiCheat:
-    # Status of this anti-cheat: enabled or disabled
-    isEnable: true
-    # Text that will be displayed to the player when receiving a punishment
-    punishText: "Suspicious use of Skills Cheat"
-    # Choice of punishment for certain types of cheats
-    #  0 - nothing,
-    #  1 - only logging,
-    #  2 - kick from the server + logging,
-    #  3 - blocking by IP/SteamID + logging).
-    punishType: 2
-    # Acceptable percentage of difference between new and old player experience level
-    deltaXPPercentage: 0.75
+# General settings for all anti-cheats
+general:
+  isLogClientCommand: true
+  # Nicknames of players on whom the anti-cheat will not work (white list)
+  whiteListUsername:
+    - admin
+  # Groups of user rights for which anti-cheat will not work (white list)
+  whiteListGroup:
+    - admin
+    - moderator
+# Filtering chat messages from players
+chatFilter:
+  # Status of this chat filter: enabled or disabled
+  isEnable: true
+  # Text that will be displayed to the player when receiving a punishment
+  punishText: "Using prohibited words in chat"
+  # Choice of punishment for certain types of cheats
+  #  0 - nothing,
+  #  1 - only logging,
+  #  2 - kick from the server + logging,
+  #  3 - blocking by IP/SteamID + logging).
+  punishType: 2
+  # List of words allowed on the server, even if they fall into prohibited patterns. List separated by commas.
+  # Write in lower case.
+  whiteListWords: "перебанит, потреблять"
+  # List of individual words prohibited on the server. List separated by commas.
+  # Write in lower case.
+  blackListWords: "ахуенный, ахуеный, бля, блять, гавно, гей, долбоеб, долбоёб, еба, ебля, ебу, жопа, клитор, 
+  манда, москаль, нехуя, нихуя, оргазм, оргия, офигел, охрененный охеренный, охуенный, охуеный, пздц, пипец, ппц, 
+  прошмандовка, ска, сперма, сук, сука, сучка, уебан, фига, хер, хера, херня, херота, хрен, хуй, хуйня, хуйца, хули, 
+  хуя, шалава, шлюха"
+  # Regular expression patterns for banned words
+  # Write in lower case.
+  patternListWords:
+    - "\\w*секс\\w*"
+    - "\\w*https?://\\w*"
+    - "\\w*пид(р|ар|ор)\\w*"
+    - "\\w*(го(вн|мик|мек)|(а|о)ху(е|ё|и|й))\\w*"
+    - "\\w*((е|ё)ба(н|л|ш|т)|бля(д|т)|(е|ё)б(у|ись|ну(т|л|ш|в)|ка|ли|ен|ищ|ит|ош))\\w*"
+    - "\\w*(мудак|г(о|а)ндон|пизд|залуп|х(у(й|е|ё|и|я|ю)|ер|рен))\\w*"
+# Anti-cheat that prevents the use of BrushTool
+antiBrushTool:
+  # Status of this anti-cheat: enabled or disabled
+  isEnable: true
+  # Text that will be displayed to the player when receiving a punishment
+  punishText: "Suspicious use of BrushTool"
+  # Choice of punishment for certain types of cheats
+  #  0 - nothing,
+  #  1 - only logging,
+  #  2 - kick from the server + logging,
+  #  3 - blocking by IP/SteamID + logging).
+  punishType: 1
+  # Allowed time between placing objects on the map (if user skills reduce the time for placement, you need to change this value)
+  # The value is calculated in milliseconds
+  placeTimeLimit: 1500
+  # Minimum distance in cells from which the anti-cheat starts working
+  minDistance: 4
+  # Maximum distance in cells after which the anti-cheat will not work
+  maxDistance: 70
+  # The maximum number of objects that a player can install instantly before the anti-cheat is triggered
+  # For example, placing a bed of 4 squares causes it to be checked 4 times in one instant
+  maxObjectPlace: 4
+  # Blacklist of sprites of objects to be placed on the map (for example, a water sprite cannot be placed in an honest way)
+  # The name of the sprite is indicated, not the object itself
+  blackListSprite:
+    # Below is a list of water tiles
+    - "blends_natural_02_0"
+    - "blends_natural_02_1"
+    - "blends_natural_02_2"
+    - "blends_natural_02_3"
+    - "blends_natural_02_4"
+    - "blends_natural_02_5"
+    - "blends_natural_02_6"
+    - "blends_natural_02_7"
+    - "blends_natural_02_8"
+    - "blends_natural_02_9"
+    - "blends_natural_02_10"
+    - "blends_natural_02_11"
+    - "blends_natural_02_12"
+    - "blends_natural_02_13"
+    - "blends_natural_02_14"
+    - "blends_natural_02_15"
+# Anti-cheat that prevents the use of Vehicle Cheat
+vehicleAntiCheat:
+  # Status of this anti-cheat: enabled or disabled
+  isEnable: true
+  # Text that will be displayed to the player when receiving a punishment
+  punishText: "Suspicious use of Vehicle Cheat"
+  # Choice of punishment for certain types of cheats
+  #  0 - nothing,
+  #  1 - only logging,
+  #  2 - kick from the server + logging,
+  #  3 - blocking by IP/SteamID + logging).
+  punishType: 3
+# Anti-cheat that prevents the use of Extra Info
+extraInfoAntiCheat:
+  # Status of this anti-cheat: enabled or disabled
+  isEnable: true
+  # Text that will be displayed to the player when receiving a punishment
+  punishText: "Suspicious use of Extra Info"
+  # Choice of punishment for certain types of cheats
+  #  0 - nothing,
+  #  1 - only logging,
+  #  2 - kick from the server + logging,
+  #  3 - blocking by IP/SteamID + logging).
+  punishType: 3
+# Anti-cheat that prevents the use of Skills Cheat
+skillAntiCheat:
+  # Status of this anti-cheat: enabled or disabled
+  isEnable: true
+  # Text that will be displayed to the player when receiving a punishment
+  punishText: "Suspicious use of Skills Cheat"
+  # Choice of punishment for certain types of cheats
+  #  0 - nothing,
+  #  1 - only logging,
+  #  2 - kick from the server + logging,
+  #  3 - blocking by IP/SteamID + logging).
+  punishType: 3
+  # Acceptable percentage of difference between new and old player experience level
+  deltaXPPercentage: 0.85

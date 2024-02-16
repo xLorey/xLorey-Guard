@@ -15,18 +15,18 @@ import zombie.network.ZomboidNetData;
  */
 public class ExtraInfo {
     /**
-     * Performing anti-cheat actions when receiving a new package
+     * Performing anti-cheat actions when receiving a new packet
      * @param packet           received packet from the player
      * @param player           player object
      * @param playerConnection active player connection
      */
     public static void handlePacket(ZomboidNetData packet, IsoPlayer player, UdpConnection playerConnection) {
-        if (!ServerPlugin.getDefaultConfig().getBoolean("settings.extraInfoAntiCheat.isEnable") || GeneralTools.isPlayerHasRights(player)) return;
+        if (!ServerPlugin.getDefaultConfig().getBoolean("extraInfoAntiCheat.isEnable") || GeneralTools.isPlayerHasRights(player)) return;
 
         GeneralTools.punishPlayer(
-                ServerPlugin.getDefaultConfig().getInt("settings.extraInfoAntiCheat.punishType"),
+                ServerPlugin.getDefaultConfig().getInt("extraInfoAntiCheat.punishType"),
                 player,
-                ServerPlugin.getDefaultConfig().getString("settings.extraInfoAntiCheat.punishText")
+                ServerPlugin.getDefaultConfig().getString("extraInfoAntiCheat.punishText")
         );
     }
 }

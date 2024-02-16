@@ -20,7 +20,7 @@ import java.util.ArrayList;
  */
 public class VehicleCommand {
     /**
-     * Performing anti-cheat actions when receiving a new package
+     * Performing anti-cheat actions when receiving a new packet
      * @param packet           received packet from the player
      * @param player           player object
      * @param playerConnection active player connection
@@ -42,20 +42,20 @@ public class VehicleCommand {
             add("remove");
         }};
 
-        if (ServerPlugin.getDefaultConfig().getBoolean("settings.general.isLogClientCommand") && !command.equals("ISLogSystem")){
+        if (ServerPlugin.getDefaultConfig().getBoolean("general.isLogClientCommand") && !command.equals("ISLogSystem")){
             Logger.print(String.format("AC > Player '%s' enter the command '%s' with method '%s'",
                     player.getUsername(),
                     command,
                     method));
         }
 
-        if (ServerPlugin.getDefaultConfig().getBoolean("settings.vehicleAntiCheat.isEnable") && !GeneralTools.isPlayerHasRights(player)){
+        if (ServerPlugin.getDefaultConfig().getBoolean("vehicleAntiCheat.isEnable") && !GeneralTools.isPlayerHasRights(player)){
             for (String cheatCmd : vehicleCheats) {
                 if (method.equals(cheatCmd)){
                     GeneralTools.punishPlayer(
-                            ServerPlugin.getDefaultConfig().getInt("settings.vehicleAntiCheat.punishType"),
+                            ServerPlugin.getDefaultConfig().getInt("vehicleAntiCheat.punishType"),
                             player,
-                            ServerPlugin.getDefaultConfig().getString("settings.vehicleAntiCheat.punishText"));
+                            ServerPlugin.getDefaultConfig().getString("vehicleAntiCheat.punishText"));
                 }
             }
         }

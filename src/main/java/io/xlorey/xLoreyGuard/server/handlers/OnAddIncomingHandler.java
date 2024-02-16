@@ -49,8 +49,8 @@ public class OnAddIncomingHandler extends OnAddIncoming {
 
         try {
             switch (packetType) {
+//              case ActionPacket -> PlayerAction.handlePacket(packet, player, playerConnection);
                 case AddItemToMap -> BrushTool.handlePacket(packet, player, playerConnection);
-//                case ActionPacket -> PlayerAction.handlePacket(packet, player, playerConnection);
                 case ClientCommand -> VehicleCommand.handlePacket(packet, player, playerConnection);
                 case ExtraInfo -> ExtraInfo.handlePacket(packet, player, playerConnection);
                 case SyncXP -> Skills.handlePacket(packet, player, playerConnection);

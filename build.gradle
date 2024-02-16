@@ -25,7 +25,7 @@ dependencies {
     /**
      * Flux Loader - connects only in compileOnly format
      */
-    compileOnly files("libs/FluxLoader-0.8.0.jar")
+    compileOnly files("libs/FluxLoader-0.8.2.jar")
     compileOnly files("libs/zombie.jar")
     compileOnly files("libs/fmod.jar")
 }

@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
  */
 public class PlayerAction {
     /**
-     * Performing anti-cheat actions when receiving a new package
+     * Performing anti-cheat actions when receiving a new packet
      * @param packet           received packet from the player
      * @param player           player object
      * @param playerConnection active player connection

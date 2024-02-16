@@ -46,7 +46,7 @@ public class GeneralTools {
      * @return true if the package is authorized, false otherwise.
      */
     public static boolean isPlayerHasRights(IsoPlayer player){
-        for (Object whiteListedUsername : ServerPlugin.getDefaultConfig().getList("settings.general.whiteListUsername")) {
+        for (Object whiteListedUsername : ServerPlugin.getDefaultConfig().getList("general.whiteListUsername")) {
             String userName = (String) whiteListedUsername;
 
             if (userName == null || userName.isEmpty()) continue;
@@ -54,7 +54,7 @@ public class GeneralTools {
             if(userName.equalsIgnoreCase(player.getUsername())) return true;
         }
 
-        for (Object whiteListedGroup : ServerPlugin.getDefaultConfig().getList("settings.general.whiteListGroup")) {
+        for (Object whiteListedGroup : ServerPlugin.getDefaultConfig().getList("general.whiteListGroup")) {
             String group = (String) whiteListedGroup;
 
             if (group == null || group.isEmpty()) continue;

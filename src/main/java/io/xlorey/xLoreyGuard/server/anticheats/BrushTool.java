@@ -28,13 +28,13 @@ public class BrushTool {
     private static final Map<String, long[]> placementMap = new HashMap<>();
 
     /**
-     * Performing anti-cheat actions when receiving a new package
+     * Performing anti-cheat actions when receiving a new packet
      * @param packet           received packet from the player
      * @param player           player object
      * @param playerConnection active player connection
      */
     public static void handlePacket(ZomboidNetData packet, IsoPlayer player, UdpConnection playerConnection) {
-        if (!ServerPlugin.getDefaultConfig().getBoolean("settings.antiBrushTool.isEnable") || GeneralTools.isPlayerHasRights(player)) return;
+        if (!ServerPlugin.getDefaultConfig().getBoolean("antiBrushTool.isEnable") || GeneralTools.isPlayerHasRights(player)) return;
 
         IsoObject object = WorldItemTypes.createFromBuffer(packet.buffer);
 
@@ -73,15 +73,15 @@ public class BrushTool {
                 object.getY(),
                 object.getZ()));
 
-        for (Object blackListSprite : ServerPlugin.getDefaultConfig().getList("settings.antiBrushTool.blackListSprite")) {
+        for (Object blackListSprite : ServerPlugin.getDefaultConfig().getList("antiBrushTool.blackListSprite")) {
             String blackListSpriteName = (String) blackListSprite;
 
             if (blackListSpriteName == null || blackListSpriteName.isEmpty()) continue;
 
             if (spriteName.equalsIgnoreCase(blackListSpriteName)) {
-                GeneralTools.punishPlayer(ServerPlugin.getDefaultConfig().getInt("settings.antiBrushTool.punishType"),
+                GeneralTools.punishPlayer(ServerPlugin.getDefaultConfig().getInt("antiBrushTool.punishType"),
                         player,
-                        ServerPlugin.getDefaultConfig().getString("settings.antiBrushTool.punishText"));
+                        ServerPlugin.getDefaultConfig().getString("antiBrushTool.punishText"));
 
                 return;
             }
@@ -92,7 +92,7 @@ public class BrushTool {
         long lastPlaceTime = placeData[0];
         int objectCount = (int) placeData[1];
 
-        if (currentTime - lastPlaceTime <= ServerPlugin.getDefaultConfig().getInt("settings.antiBrushTool.placeTimeLimit")) {
+        if (currentTime - lastPlaceTime <= ServerPlugin.getDefaultConfig().getInt("antiBrushTool.placeTimeLimit")) {
             objectCount++;
         } else {
             objectCount = 1;
@@ -102,18 +102,18 @@ public class BrushTool {
         placeData[1] = objectCount;
         placementMap.put(player.username, placeData);
 
-        boolean isFastPlace = objectCount > ServerPlugin.getDefaultConfig().getInt("settings.antiBrushTool.maxObjectPlace");
+        boolean isFastPlace = objectCount > ServerPlugin.getDefaultConfig().getInt("antiBrushTool.maxObjectPlace");
 
-        int minDistance = ServerPlugin.getDefaultConfig().getInt("settings.antiBrushTool.minDistance");
-        int maxDistance = ServerPlugin.getDefaultConfig().getInt("settings.antiBrushTool.maxDistance");
+        int minDistance = ServerPlugin.getDefaultConfig().getInt("antiBrushTool.minDistance");
+        int maxDistance = ServerPlugin.getDefaultConfig().getInt("antiBrushTool.maxDistance");
         minDistance =  minDistance != 0 ? minDistance : 3;
         maxDistance =  maxDistance != 0 ? maxDistance : 70;
 
         float distance = GeneralTools.getDistanceBetweenObject(player, object);
         if ((distance > minDistance && distance < maxDistance) || isFastPlace) {
-            GeneralTools.punishPlayer(ServerPlugin.getDefaultConfig().getInt("settings.antiBrushTool.punishType"),
+            GeneralTools.punishPlayer(ServerPlugin.getDefaultConfig().getInt("antiBrushTool.punishType"),
                     player,
-                    ServerPlugin.getDefaultConfig().getString("settings.antiBrushTool.punishText"));
+                    ServerPlugin.getDefaultConfig().getString("antiBrushTool.punishText"));
         }
     }
 }

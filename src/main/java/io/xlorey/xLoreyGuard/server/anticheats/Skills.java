@@ -23,13 +23,13 @@ import java.util.HashMap;
  */
 public class Skills {
     /**
-     * Performing anti-cheat actions when receiving a new package
+     * Performing anti-cheat actions when receiving a new packet
      * @param packet           received packet from the player
      * @param player           player object
      * @param playerConnection active player connection
      */
     public static void handlePacket(ZomboidNetData packet, IsoPlayer player, UdpConnection playerConnection) throws IOException {
-        if (!ServerPlugin.getDefaultConfig().getBoolean("settings.skillAntiCheat.isEnable") || GeneralTools.isPlayerHasRights(player)) return;
+        if (!ServerPlugin.getDefaultConfig().getBoolean("skillAntiCheat.isEnable") || GeneralTools.isPlayerHasRights(player)) return;
 
         ByteBuffer byteBuffer = packet.buffer;
         short playerID = byteBuffer.getShort();
@@ -76,7 +76,7 @@ public class Skills {
 
                 float requiredXPForNewLevel = newPerkInfo.perk.getXpForLevel(levelForXP);
 
-                double configXPChangePercentage = ServerPlugin.getDefaultConfig().getFloat("settings.skillAntiCheat.deltaXPPercentage");
+                double configXPChangePercentage = ServerPlugin.getDefaultConfig().getFloat("skillAntiCheat.deltaXPPercentage");
                 float acceptableXPChangePercentage = configXPChangePercentage > 0f ? (float) configXPChangePercentage : 0.6f;
 
                 int percentageXp = (int) (acceptableXPChangePercentage * 100);
@@ -86,9 +86,9 @@ public class Skills {
                             player.username, newPerkInfo.perk.getName(), oldXP, newXP, percentageXp));
 
                     GeneralTools.punishPlayer(
-                            ServerPlugin.getDefaultConfig().getInt("settings.skillAntiCheat.punishType"),
+                            ServerPlugin.getDefaultConfig().getInt("skillAntiCheat.punishType"),
                             player,
-                            ServerPlugin.getDefaultConfig().getString("settings.skillAntiCheat.punishText"));
+                            ServerPlugin.getDefaultConfig().getString("skillAntiCheat.punishText"));
                 }
             }
         }
