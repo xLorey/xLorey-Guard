@@ -3,6 +3,7 @@ package io.xlorey.xLoreyGuard.server.utils;
 import io.xlorey.fluxloader.server.api.PlayerUtils;
 import io.xlorey.fluxloader.utils.Logger;
 import io.xlorey.xLoreyGuard.server.ServerPlugin;
+import io.xlorey.xLoreyGuard.server.discord.WebHook;
 import io.xlorey.xLoreyGuard.server.enums.PunishType;
 import zombie.characters.IsoPlayer;
 import zombie.iso.IsoObject;
@@ -30,6 +31,8 @@ public class GeneralTools {
         if (punishType == PunishType.LOGGING.ordinal()) {
             return;
         };
+
+        WebHook.sendMessage(player, reason);
 
         if (punishType == PunishType.KICK.ordinal()) {
             PlayerUtils.kickPlayer(player, reason);

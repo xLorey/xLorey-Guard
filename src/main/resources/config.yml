@@ -8,6 +8,26 @@ general:
   whiteListGroup:
     - admin
     - moderator
+# Display messages about punishments in the discord channel
+discordAlert:
+  # Notification status: true - enabled, false - disabled
+  isEnable: false
+  # Link to WebHook chat channel
+  webHookURL: "YOUR_URL"
+  # Nickname of the bot that will write notifications
+  botUsername: "Alert"
+  # Avatar of the bot that will write notifications
+  botAvatarURL: "https://www.trudohrana.ru/images/articles/103432/v_103432/W09.jpg"
+  # Template of the message that will be displayed in the chat
+  # Arguments:
+  # <PLAYER_NAME> - player nickname
+  # <DATE> - punishment date
+  # <REASON> - reason for punishment
+  messageTemplate: "'''
+  Player nickname: <PLAYER_NAME>
+  Date: <DATE>
+  Reason: <REASON>
+  '''"
 # Filtering chat messages from players
 chatFilter:
   # Status of this chat filter: enabled or disabled
@@ -80,6 +100,13 @@ antiBrushTool:
     - "blends_natural_02_13"
     - "blends_natural_02_14"
     - "blends_natural_02_15"
+  # List of sprites for which anti-cheat will not work, you can specify a partial name
+  whiteListSprite:
+    - "roof"
+    - "fencing_damaged"
+    - "floor"
+    - "damaged"
+    - "carpentry"
 # Anti-cheat that prevents the use of Vehicle Cheat
 vehicleAntiCheat:
   # Status of this anti-cheat: enabled or disabled
@@ -117,7 +144,7 @@ skillAntiCheat:
   #  3 - blocking by IP/SteamID + logging).
   punishType: 3
   # Acceptable percentage of difference between new and old player experience level
-  deltaXPPercentage: 0.85# Anti-cheat that prevents the use of Skills Cheat
+  deltaXPPercentage: 0.85
 # Anti VPN in all its glory
 antiVPN:
   # Status of this anti-cheat: enabled or disabled

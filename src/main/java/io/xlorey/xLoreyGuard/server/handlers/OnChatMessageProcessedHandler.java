@@ -4,6 +4,7 @@ import io.xlorey.fluxloader.events.OnChatMessageProcessed;
 import io.xlorey.fluxloader.server.api.PlayerUtils;
 import io.xlorey.fluxloader.utils.Logger;
 import io.xlorey.xLoreyGuard.server.ServerPlugin;
+import io.xlorey.xLoreyGuard.server.anticheats.ChatFilter;
 import io.xlorey.xLoreyGuard.server.utils.GeneralTools;
 import zombie.characters.IsoPlayer;
 import zombie.chat.ChatBase;
@@ -31,59 +32,6 @@ public class OnChatMessageProcessedHandler extends OnChatMessageProcessed {
     public void handleEvent(ChatBase chatBase, ChatMessage chatMessage) {
         if (chatMessage == null || chatBase == null) return;
 
-        String text = chatMessage.getText();
-        String[] words = text.split(" ");
-        IsoPlayer player = PlayerUtils.getPlayerByUsername(chatMessage.getAuthor());
-
-        if (player == null) return;
-
-        if (!ServerPlugin.getDefaultConfig().getBoolean("chatFilter.isEnable") || GeneralTools.isPlayerHasRights(player)) return;
-
-        for (String word : words) {
-            if (!isForbiddenWord(word)) continue;
-
-            Logger.print(String.format("AC > Player '%s' used the forbidden word '%s' in chat!",
-                    player.getUsername(),
-                    word));
-
-            GeneralTools.punishPlayer(ServerPlugin.getDefaultConfig().getInt("chatFilter.punishType"),
-                    player,
-                    ServerPlugin.getDefaultConfig().getString("chatFilter.punishText"));
-
-            return;
-        }
-    }
-
-    /**
-     * Checking a word for its presence in prohibited lists
-     * @param word the word to check
-     * @return true - the word is prohibited, false - the word is allowed
-     */
-    private static boolean isForbiddenWord(String word) {
-        ArrayList<String> whiteWords = new ArrayList<>(List.of(ServerPlugin.getDefaultConfig().getString("chatFilter.whiteListWords")
-                .trim()
-                .replace("\n","")
-                .replace(" ", "")
-                .split(",")));
-
-        ArrayList<String> blackWords = new ArrayList<>(List.of(ServerPlugin.getDefaultConfig().getString("chatFilter.blackListWords")
-                .trim()
-                .replace("\n","")
-                .replace(" ", "")
-                .split(",")));
-
-        if (whiteWords.contains(word.toLowerCase())) return false;
-
-        if (blackWords.contains(word.toLowerCase())) return true;
-
-        for(Object templateObj : ServerPlugin.getDefaultConfig().getList("chatFilter.patternListWords")) {
-            String template = (String) templateObj;
-            Pattern pattern = Pattern.compile(template);
-            Matcher matcher = pattern.matcher(word);
-
-            if (matcher.find()) return true;
-        }
-
-        return false;
+        ChatFilter.handlePacket(chatBase, chatMessage);
     }
 }

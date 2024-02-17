@@ -46,12 +46,12 @@ public class Skills {
             return;
         }
 
-        for (int i = 0; i < perkListSaved.size(); i++) {
-            IsoGameCharacter.PerkInfo savedPerkInfo = perkListSaved.get(i);
-            IsoGameCharacter.PerkInfo newPerkInfo = perkListNew.get(i);
+        for (int index = 0; index < perkListSaved.size(); index++) {
+            IsoGameCharacter.PerkInfo savedPerkInfo = perkListSaved.get(index);
+            IsoGameCharacter.PerkInfo newPerkInfo = perkListNew.get(index);
 
             if (!savedPerkInfo.perk.equals(newPerkInfo.perk)) {
-                Logger.print(String.format("AC > Player '%s' has a mismatch between old and new skills at position %s", player.getUsername(), i));
+                Logger.print(String.format("AC > Player '%s' has a mismatch between old and new skills at position %s", player.getUsername(), index));
                 continue;
             }
 
@@ -61,15 +61,15 @@ public class Skills {
             float oldXP = savedPlayerXP.get(savedPerkInfo.perk);
             float newXP = player.getXp().getXP(newPerkInfo.perk);
 
-            if (savedPerkInfo.level != newPerkInfo.level) {
+            if (savedPerkInfo.level < newPerkInfo.level) {
                 String levelChangeMessage = String.format("AC > Player '%s' has had his skill '%s' changed: Old level: %d, New level: %d.",
-                        player.username, savedPerkInfo.perk.getName(), savedPerkInfo.level, newPerkInfo.level);
+                        player.username, savedPerkInfo.perk.getId(), savedPerkInfo.level, newPerkInfo.level);
                 Logger.print(levelChangeMessage);
             }
 
-            if (oldXP != newXP) {
+            if (oldXP < newXP) {
                 String xpChangeMessage = String.format("AC > Player '%s' skill '%s' experience changed from '%.1f' to '%.1f'.",
-                        player.username, newPerkInfo.perk.getName(), oldXP, newXP);
+                        player.username, newPerkInfo.perk.getId(), oldXP, newXP);
                 Logger.print(xpChangeMessage);
 
                 int levelForXP = Math.max(1, Math.min(newPerkInfo.level, 10));
@@ -77,18 +77,23 @@ public class Skills {
                 float requiredXPForNewLevel = newPerkInfo.perk.getXpForLevel(levelForXP);
 
                 double configXPChangePercentage = ServerPlugin.getDefaultConfig().getFloat("skillAntiCheat.deltaXPPercentage");
-                float acceptableXPChangePercentage = configXPChangePercentage > 0f ? (float) configXPChangePercentage : 0.6f;
+                float acceptableXPChangePercentage = configXPChangePercentage > 0f ? (float) configXPChangePercentage : 0.85f;
 
                 int percentageXp = (int) (acceptableXPChangePercentage * 100);
 
                 if (Math.abs(newXP - oldXP) > requiredXPForNewLevel * acceptableXPChangePercentage) {
                     Logger.print(String.format("AC > Player '%s' changed skill experience '%s' from '%.1f' to '%.1f'. Difference of over %d%%!",
-                            player.username, newPerkInfo.perk.getName(), oldXP, newXP, percentageXp));
+                            player.username, newPerkInfo.perk.getId(), oldXP, newXP, percentageXp));
 
+                    String punishText = String.format("%s | Skill: %s | Old XP: %.1f | New XP: %.1f",
+                            ServerPlugin.getDefaultConfig().getString("skillAntiCheat.punishText"),
+                            newPerkInfo.perk.getId(),
+                            oldXP,
+                            newXP);
                     GeneralTools.punishPlayer(
                             ServerPlugin.getDefaultConfig().getInt("skillAntiCheat.punishType"),
                             player,
-                            ServerPlugin.getDefaultConfig().getString("skillAntiCheat.punishText"));
+                            punishText);
                 }
             }
         }

@@ -66,14 +66,29 @@ public class BrushTool {
 
         if (isInventoryObject) return;
 
-        if (spriteName.contains("roof") || objectName.contains("roof")) return;
+        for (Object whiteListSprite : ServerPlugin.getDefaultConfig().getList("antiBrushTool.whiteListSprite")) {
+            String whiteListSpriteName = (String) whiteListSprite;
 
-        Logger.print(String.format("Player '%s' placed object '%s' at coordinates: [%s, %s, %s]",
+            if (spriteName.toLowerCase().contains(whiteListSpriteName.toLowerCase())) return;
+            if (objectName.toLowerCase().contains(whiteListSpriteName.toLowerCase())) return;
+        }
+
+        if (object.square == null) return;
+
+        float distance = GeneralTools.getDistanceBetweenObject(player, object);
+
+        Logger.print(String.format("Player '%s' placed object '%s' at coordinates: [%s, %s, %s]. Distance: %.1f",
                 player.getUsername(),
                 objectName,
                 object.getX(),
                 object.getY(),
-                object.getZ()));
+                object.getZ(),
+                distance));
+
+        String punishText = String.format("%s | Distance: %.1f | Object: %s",
+                ServerPlugin.getDefaultConfig().getString("antiBrushTool.punishText"),
+                distance,
+                objectName);
 
         for (Object blackListSprite : ServerPlugin.getDefaultConfig().getList("antiBrushTool.blackListSprite")) {
             String blackListSpriteName = (String) blackListSprite;
@@ -111,7 +126,6 @@ public class BrushTool {
         minDistance =  minDistance != 0 ? minDistance : 3;
         maxDistance =  maxDistance != 0 ? maxDistance : 70;
 
-        float distance = GeneralTools.getDistanceBetweenObject(player, object);
         if ((distance > minDistance && distance < maxDistance) || isFastPlace) {
             GeneralTools.punishPlayer(ServerPlugin.getDefaultConfig().getInt("antiBrushTool.punishType"),
                     player,
