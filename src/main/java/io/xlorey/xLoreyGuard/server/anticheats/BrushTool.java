@@ -98,7 +98,7 @@ public class BrushTool {
             if (spriteName.equalsIgnoreCase(blackListSpriteName)) {
                 GeneralTools.punishPlayer(ServerPlugin.getDefaultConfig().getInt("antiBrushTool.punishType"),
                         player,
-                        ServerPlugin.getDefaultConfig().getString("antiBrushTool.punishText"));
+                        punishText);
 
                 return;
             }
@@ -129,7 +129,7 @@ public class BrushTool {
         if ((distance > minDistance && distance < maxDistance) || isFastPlace) {
             GeneralTools.punishPlayer(ServerPlugin.getDefaultConfig().getInt("antiBrushTool.punishType"),
                     player,
-                    ServerPlugin.getDefaultConfig().getString("antiBrushTool.punishText"));
+                    punishText);
         }
     }
 }

@@ -9,7 +9,7 @@ plugins {
  * Project group and version
  */
 group = 'io.xlorey.xLoreyGuard'
-version = '0.5.0'
+version = '0.5.1'
 
 /**
  * Repositories used
