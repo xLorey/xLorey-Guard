@@ -66,6 +66,8 @@ public class BrushTool {
 
         if (isInventoryObject) return;
 
+        if (spriteName.contains("roof") || objectName.contains("roof")) return;
+
         Logger.print(String.format("Player '%s' placed object '%s' at coordinates: [%s, %s, %s]",
                 player.getUsername(),
                 objectName,

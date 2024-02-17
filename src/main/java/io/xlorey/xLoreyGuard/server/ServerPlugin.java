@@ -5,6 +5,7 @@ import io.xlorey.fluxloader.plugin.Plugin;
 import io.xlorey.fluxloader.shared.EventManager;
 import io.xlorey.xLoreyGuard.server.handlers.OnAddIncomingHandler;
 import io.xlorey.xLoreyGuard.server.handlers.OnChatMessageProcessedHandler;
+import io.xlorey.xLoreyGuard.server.handlers.OnPlayerFullyConnectedHandler;
 import io.xlorey.xLoreyGuard.server.handlers.OnServerInitializeHandler;
 
 /**
@@ -26,6 +27,7 @@ public class ServerPlugin extends Plugin {
 
         EventManager.subscribe(new OnAddIncomingHandler());
         EventManager.subscribe(new OnChatMessageProcessedHandler());
+        EventManager.subscribe(new OnPlayerFullyConnectedHandler());
         EventManager.subscribe(new OnServerInitializeHandler());
     }
 

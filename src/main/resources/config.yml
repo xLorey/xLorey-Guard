@@ -19,7 +19,7 @@ chatFilter:
   #  1 - only logging,
   #  2 - kick from the server + logging,
   #  3 - blocking by IP/SteamID + logging).
-  punishType: 2
+  punishType: 1
   # List of words allowed on the server, even if they fall into prohibited patterns. List separated by commas.
   # Write in lower case.
   whiteListWords: "перебанит, потреблять"
@@ -49,7 +49,7 @@ antiBrushTool:
   #  1 - only logging,
   #  2 - kick from the server + logging,
   #  3 - blocking by IP/SteamID + logging).
-  punishType: 1
+  punishType: 3
   # Allowed time between placing objects on the map (if user skills reduce the time for placement, you need to change this value)
   # The value is calculated in milliseconds
   placeTimeLimit: 1500
@@ -59,7 +59,7 @@ antiBrushTool:
   maxDistance: 70
   # The maximum number of objects that a player can install instantly before the anti-cheat is triggered
   # For example, placing a bed of 4 squares causes it to be checked 4 times in one instant
-  maxObjectPlace: 4
+  maxObjectPlace: 5
   # Blacklist of sprites of objects to be placed on the map (for example, a water sprite cannot be placed in an honest way)
   # The name of the sprite is indicated, not the object itself
   blackListSprite:
@@ -117,4 +117,18 @@ skillAntiCheat:
   #  3 - blocking by IP/SteamID + logging).
   punishType: 3
   # Acceptable percentage of difference between new and old player experience level
-  deltaXPPercentage: 0.85
+  deltaXPPercentage: 0.85# Anti-cheat that prevents the use of Skills Cheat
+# Anti VPN in all its glory
+antiVPN:
+  # Status of this anti-cheat: enabled or disabled
+  isEnable: true
+  # Text that will be displayed to the player when receiving a punishment
+  punishText: "Suspicious use of VPN"
+  # Choice of punishment for certain types of cheats
+  #  0 - nothing,
+  #  1 - only logging,
+  #  2 - kick from the server + logging,
+  #  3 - blocking by IP/SteamID + logging).
+  punishType: 1
+  # API key from the 'iphub.info' service
+  API: "MjMwNDU6YklIeGRQcWZnbmdJcVBpNTluOTFsMGpkd21wTUtRbU8="

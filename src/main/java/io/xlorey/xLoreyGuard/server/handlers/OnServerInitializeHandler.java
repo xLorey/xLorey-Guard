@@ -11,6 +11,9 @@ import io.xlorey.fluxloader.utils.Logger;
  * <p> xLoreyGuard © 2024. All rights reserved. </p>
  */
 public class OnServerInitializeHandler extends OnServerInitialize {
+    /**
+     * Called Event Handling Method
+     */
     @Override
     public void handleEvent() {
         Logger.print("AC > The server protection system has been initialized!");

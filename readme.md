@@ -27,6 +27,7 @@ This tool is a Flux server protection plugin. Contains a server anti-cheat that 
 - Blocking cheats for skills
 - Server-side player inventory synchronization (useful for future anti-cheats)
 - Chat Filter
+- AntiVPN
 
 # How to use
 
