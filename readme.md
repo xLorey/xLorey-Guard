@@ -28,6 +28,7 @@ This tool is a Flux server protection plugin. Contains a server anti-cheat that 
 - Server-side player inventory synchronization (useful for future anti-cheats)
 - Chat Filter
 - AntiVPN
+- Discord Alert (Output of messages for punishments via WebHook)
 
 # How to use
 

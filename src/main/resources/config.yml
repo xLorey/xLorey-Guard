@@ -13,21 +13,17 @@ discordAlert:
   # Notification status: true - enabled, false - disabled
   isEnable: false
   # Link to WebHook chat channel
-  webHookURL: "YOUR_URL"
+  webHookURL: "YOUR_WEBHOOK"
   # Nickname of the bot that will write notifications
   botUsername: "Alert"
   # Avatar of the bot that will write notifications
-  botAvatarURL: "https://www.trudohrana.ru/images/articles/103432/v_103432/W09.jpg"
+  botAvatarURL: "https://sh19-shaxtersk-r897.gosweb.gosuslugi.ru/netcat_files/200/3528/X0g_RtWCbQY.jpg"
   # Template of the message that will be displayed in the chat
   # Arguments:
   # <PLAYER_NAME> - player nickname
   # <DATE> - punishment date
   # <REASON> - reason for punishment
-  messageTemplate: "'''
-  Player nickname: <PLAYER_NAME>
-  Date: <DATE>
-  Reason: <REASON>
-  '''"
+  messageTemplate: "```\nPlayer: <PLAYER_NAME>\nDate: <DATE>\nReason: <REASON>\n```"
 # Filtering chat messages from players
 chatFilter:
   # Status of this chat filter: enabled or disabled
@@ -106,7 +102,6 @@ antiBrushTool:
     - "fencing_damaged"
     - "floor"
     - "damaged"
-    - "carpentry"
 # Anti-cheat that prevents the use of Vehicle Cheat
 vehicleAntiCheat:
   # Status of this anti-cheat: enabled or disabled
@@ -144,7 +139,7 @@ skillAntiCheat:
   #  3 - blocking by IP/SteamID + logging).
   punishType: 3
   # Acceptable percentage of difference between new and old player experience level
-  deltaXPPercentage: 0.85
+  deltaXPPercentage: 0.88
 # Anti VPN in all its glory
 antiVPN:
   # Status of this anti-cheat: enabled or disabled

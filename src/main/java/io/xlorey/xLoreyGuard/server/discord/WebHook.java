@@ -22,7 +22,7 @@ import java.util.Date;
 public class WebHook {
     /**
      * Sending a message via DiscordWebHook
-     * @param player объект игрока
+     * @param player player object
      * @param reason message text
      */
     public static void sendMessage(IsoPlayer player, String reason) {
@@ -30,10 +30,10 @@ public class WebHook {
 
         if (!ServerPlugin.getDefaultConfig().getBoolean("discordAlert.isEnable")) return;
 
-        String text = formatTemplate(player, reason);
-        String webHookUrl = ServerPlugin.getDefaultConfig().getString("discordAlert.webHookURL");
-        String avatarURL = ServerPlugin.getDefaultConfig().getString("discordAlert.botUsername");
-        String botUsername = ServerPlugin.getDefaultConfig().getString("discordAlert.botAvatarURL");
+        String text = formatTemplate(player, reason).trim();
+        String webHookUrl = ServerPlugin.getDefaultConfig().getString("discordAlert.webHookURL").trim();
+        String avatarURL = ServerPlugin.getDefaultConfig().getString("discordAlert.botAvatarURL").trim();
+        String botUsername = ServerPlugin.getDefaultConfig().getString("discordAlert.botUsername").trim();
 
         try {
             JsonObject json = new JsonObject();
