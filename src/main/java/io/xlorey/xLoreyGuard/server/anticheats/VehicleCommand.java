@@ -10,6 +10,8 @@ import zombie.network.ZomboidNetData;
 
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 /**
  * Author: Deknil
@@ -39,7 +41,6 @@ public class VehicleCommand {
             add("repair");
             add("setRust");
             add("setPartCondition");
-            add("remove");
         }};
 
         if (ServerPlugin.getDefaultConfig().getBoolean("general.isLogClientCommand") && !command.equals("ISLogSystem")){
@@ -52,10 +53,16 @@ public class VehicleCommand {
         if (ServerPlugin.getDefaultConfig().getBoolean("vehicleAntiCheat.isEnable") && !GeneralTools.isPlayerHasRights(player)){
             for (String cheatCmd : vehicleCheats) {
                 if (method.equals(cheatCmd)){
+                    String[] words = cheatCmd.split("(?=\\p{Upper})");
+                    String formattedCmd = Arrays.stream(words)
+                            .map(word -> word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase())
+                            .collect(Collectors.joining(" "));
+
                     GeneralTools.punishPlayer(
                             ServerPlugin.getDefaultConfig().getInt("vehicleAntiCheat.punishType"),
                             player,
-                            ServerPlugin.getDefaultConfig().getString("vehicleAntiCheat.punishText"));
+                            ServerPlugin.getDefaultConfig().getString("vehicleAntiCheat.punishText") + " | Action: " + formattedCmd);
+                    return;
                 }
             }
         }
