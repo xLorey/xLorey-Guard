@@ -39,6 +39,10 @@ public class Skills {
 
         player.getXp().load(byteBuffer, 195);
 
+        double survivedHours = player.getHoursSurvived();
+        int minHours = ServerPlugin.getDefaultConfig().getInt("skillAntiCheat.minHours");
+        int maxLevel = ServerPlugin.getDefaultConfig().getInt("skillAntiCheat.maxLevel");
+
         ArrayList<IsoGameCharacter.PerkInfo> perkListNew = new ArrayList<>(player.getPerkList());
 
         if (perkListSaved.size() != perkListNew.size()) {
@@ -49,6 +53,7 @@ public class Skills {
         for (int index = 0; index < perkListSaved.size(); index++) {
             IsoGameCharacter.PerkInfo savedPerkInfo = perkListSaved.get(index);
             IsoGameCharacter.PerkInfo newPerkInfo = perkListNew.get(index);
+            String perkID = newPerkInfo.perk.getId().toLowerCase();
 
             if (!savedPerkInfo.perk.equals(newPerkInfo.perk)) {
                 Logger.print(String.format("AC > Player '%s' has a mismatch between old and new skills at position %s", player.getUsername(), index));
@@ -58,43 +63,29 @@ public class Skills {
             Float oldXPFloat = savedPlayerXP.get(savedPerkInfo.perk);
             if (oldXPFloat == null) continue;
 
-            float oldXP = savedPlayerXP.get(savedPerkInfo.perk);
-            float newXP = player.getXp().getXP(newPerkInfo.perk);
-
             if (savedPerkInfo.level < newPerkInfo.level) {
-                String levelChangeMessage = String.format("AC > Player '%s' has had his skill '%s' changed: Old level: %d, New level: %d.",
-                        player.username, savedPerkInfo.perk.getId(), savedPerkInfo.level, newPerkInfo.level);
+                String levelChangeMessage = String.format("AC > Player '%s' has had his skill '%s' changed: Old level: %d, New level: %d. Hours survived: %.1f",
+                        player.username,
+                        perkID,
+                        savedPerkInfo.level,
+                        newPerkInfo.level,
+                        survivedHours);
                 Logger.print(levelChangeMessage);
             }
 
-            if (oldXP < newXP) {
-                String xpChangeMessage = String.format("AC > Player '%s' skill '%s' experience changed from '%.1f' to '%.1f'.",
-                        player.username, newPerkInfo.perk.getId(), oldXP, newXP);
-                Logger.print(xpChangeMessage);
+            if (perkID.equalsIgnoreCase("fitness") || perkID.equalsIgnoreCase("strength")) continue;
 
-                int levelForXP = Math.max(1, Math.min(newPerkInfo.level, 10));
-
-                float requiredXPForNewLevel = newPerkInfo.perk.getXpForLevel(levelForXP);
-
-                double configXPChangePercentage = ServerPlugin.getDefaultConfig().getFloat("skillAntiCheat.deltaXPPercentage");
-                float acceptableXPChangePercentage = configXPChangePercentage > 0f ? (float) configXPChangePercentage : 0.85f;
-
-                int percentageXp = (int) (acceptableXPChangePercentage * 100);
-
-                if (Math.abs(newXP - oldXP) > requiredXPForNewLevel * acceptableXPChangePercentage) {
-                    Logger.print(String.format("AC > Player '%s' changed skill experience '%s' from '%.1f' to '%.1f'. Difference of over %d%%!",
-                            player.username, newPerkInfo.perk.getId(), oldXP, newXP, percentageXp));
-
-                    String punishText = String.format("%s | Skill: %s | Old XP: %.1f | New XP: %.1f",
-                            ServerPlugin.getDefaultConfig().getString("skillAntiCheat.punishText"),
-                            newPerkInfo.perk.getId(),
-                            oldXP,
-                            newXP);
-                    GeneralTools.punishPlayer(
-                            ServerPlugin.getDefaultConfig().getInt("skillAntiCheat.punishType"),
-                            player,
-                            punishText);
-                }
+            if (newPerkInfo.level >= maxLevel && survivedHours < minHours) {
+                String punishText = String.format("%s | Skill: %s | Level: %s | Survived hours: %.1f",
+                        ServerPlugin.getDefaultConfig().getString("skillAntiCheat.punishText"),
+                        perkID,
+                        newPerkInfo.level,
+                        survivedHours);
+                GeneralTools.punishPlayer(
+                        ServerPlugin.getDefaultConfig().getInt("skillAntiCheat.punishType"),
+                        player,
+                        punishText);
+                return;
             }
         }
     }

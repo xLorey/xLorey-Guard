@@ -102,6 +102,7 @@ antiBrushTool:
     - "fencing_damaged"
     - "floor"
     - "damaged"
+    - "carpentry"
 # Anti-cheat that prevents the use of Vehicle Cheat
 vehicleAntiCheat:
   # Status of this anti-cheat: enabled or disabled
@@ -138,8 +139,10 @@ skillAntiCheat:
   #  2 - kick from the server + logging,
   #  3 - blocking by IP/SteamID + logging).
   punishType: 3
-  # Acceptable percentage of difference between new and old player experience level
-  deltaXPPercentage: 0.88
+  # The maximum level that can be obtained in a specified time
+  maxLevel: 7
+  # Minimum time (in-game) after which a player can level up above the specified level
+  minHours: 24
 # Anti VPN in all its glory
 antiVPN:
   # Status of this anti-cheat: enabled or disabled
@@ -154,3 +157,16 @@ antiVPN:
   punishType: 1
   # API key from the 'iphub.info' service
   API: "MjMwNDU6YklIeGRQcWZnbmdJcVBpNTluOTFsMGpkd21wTUtRbU8="
+# Anti-cheat that prevents the use of Item Dupe
+antiItemDupe:
+  # Status of this anti-cheat: enabled or disabled
+  isEnable: true
+  # Text that will be displayed to the player when receiving a punishment
+  punishText: "Suspicious use of Item Dupe"
+  #  0 - nothing,
+  #  1 - only logging,
+  #  2 - kick from the server + logging,
+  #  3 - blocking by IP/SteamID + logging).
+  punishType: 1
+  # Player inventory update time in ms
+  updateTime: 5000
