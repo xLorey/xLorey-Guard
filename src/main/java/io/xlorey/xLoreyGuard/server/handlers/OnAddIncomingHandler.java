@@ -4,6 +4,7 @@ import io.xlorey.fluxloader.events.OnAddIncoming;
 import io.xlorey.fluxloader.server.api.PlayerUtils;
 import io.xlorey.fluxloader.utils.Logger;
 import io.xlorey.xLoreyGuard.server.anticheats.*;
+import io.xlorey.xLoreyGuard.server.utils.InventoryTools;
 import zombie.characters.IsoPlayer;
 import zombie.core.raknet.UdpConnection;
 import zombie.network.PacketTypes;
@@ -55,6 +56,10 @@ public class OnAddIncomingHandler extends OnAddIncoming {
                 case ExtraInfo -> ExtraInfo.handlePacket(packet, player, playerConnection);
                 case SyncXP -> Skills.handlePacket(packet, player, playerConnection);
                 case AddXP -> Experience.handlePacket(packet, player, playerConnection);
+                case SendInventory -> {
+                    InventoryTools.updatePlayerInventory(player, packet);
+                    ItemDupe.handlePacket(packet, player, playerConnection);
+                }
             }
         } catch (Exception e) {
             Logger.print(String.format("AC > An error occurred while processing package '%s': %s",

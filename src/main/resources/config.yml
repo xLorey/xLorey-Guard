@@ -21,9 +21,10 @@ discordAlert:
   # Template of the message that will be displayed in the chat
   # Arguments:
   # <PLAYER_NAME> - player nickname
+  # <ADMIN_NAME> - admin nickname
   # <DATE> - punishment date
   # <REASON> - reason for punishment
-  messageTemplate: "```\nPlayer: <PLAYER_NAME>\nDate: <DATE>\nReason: <REASON>\n```"
+  messageTemplate: "```\nPlayer: <PLAYER_NAME>\nAdmin: <ADMIN_NAME>\nDate: <DATE>\nReason: <REASON>\n```"
 # Filtering chat messages from players
 chatFilter:
   # Status of this chat filter: enabled or disabled
@@ -167,6 +168,21 @@ antiItemDupe:
   #  1 - only logging,
   #  2 - kick from the server + logging,
   #  3 - blocking by IP/SteamID + logging).
-  punishType: 1
-  # Player inventory update time in ms
-  updateTime: 5000
+  punishType: 3
+  # Player inventory update time in ms. The less, the less performance.
+  updateTime: 7000
+  # List of prohibited identifiers (partial or complete)
+  blackList:
+    - "pipe"
+    - "bomb"
+    - "aerosol"
+    - "flametrap"
+    - "noisetrap"
+    - "remotecrafted"
+  # The maximum number of items in a player's inventory.
+  # Format list: "ID:COUNT"
+  maxCountItems:
+    - "Base.Katana:3"
+    - "Base.Pencil:50"
+    - "Base.Log:100"
+    - "Base.Plank:100"

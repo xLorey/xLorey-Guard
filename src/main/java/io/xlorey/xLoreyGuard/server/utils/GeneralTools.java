@@ -32,8 +32,6 @@ public class GeneralTools {
             return;
         };
 
-        WebHook.sendMessage(player, reason);
-
         if (punishType == PunishType.KICK.ordinal()) {
             PlayerUtils.kickPlayer(player, reason);
         };

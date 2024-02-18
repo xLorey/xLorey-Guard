@@ -23,6 +23,7 @@ This tool is a Flux server protection plugin. Contains a server anti-cheat that 
 
 - Blocking the use of in-game cheats (those sent via Extra packet)
 - Partial blocking of BrushTool use
+- Partial blocking of Dupe Item
 - Blocking cheats on cars
 - Blocking cheats for skills
 - Server-side player inventory synchronization (useful for future anti-cheats)

@@ -70,7 +70,7 @@ public class InventoryTools {
             long itemId = buffer.getLong();
             long parentId = buffer.getLong();
             boolean isEquipped = buffer.get() == 1;
-            float someVariable = buffer.getFloat();
+            float capacity = buffer.getFloat();
             int count = buffer.getInt();
             String category = GameWindow.ReadStringUTF(buffer);
             String container = GameWindow.ReadStringUTF(buffer);
@@ -84,6 +84,7 @@ public class InventoryTools {
             }
 
             item.setCount(count);
+            item.setItemCapacity(capacity);
             playerInventory.addItem(item);
         }
         player.setInventory(playerInventory);

@@ -25,12 +25,12 @@ public class WebHook {
      * @param player player object
      * @param reason message text
      */
-    public static void sendMessage(IsoPlayer player, String reason) {
+    public static void sendMessage(IsoPlayer player, String adminName, String reason) {
         if (player == null) return;
 
         if (!ServerPlugin.getDefaultConfig().getBoolean("discordAlert.isEnable")) return;
 
-        String text = formatTemplate(player, reason).trim();
+        String text = formatTemplate(player, adminName, reason).trim();
         String webHookUrl = ServerPlugin.getDefaultConfig().getString("discordAlert.webHookURL").trim();
         String avatarURL = ServerPlugin.getDefaultConfig().getString("discordAlert.botAvatarURL").trim();
         String botUsername = ServerPlugin.getDefaultConfig().getString("discordAlert.botUsername").trim();
@@ -64,7 +64,7 @@ public class WebHook {
      * @param reason reason for punishment
      * @return formatted text
      */
-    private static String formatTemplate(IsoPlayer player, String reason) {
+    private static String formatTemplate(IsoPlayer player, String adminName, String reason) {
         Date currentDate = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy - HH:mm:ss");
         String formattedDate = dateFormat.format(currentDate);
@@ -72,6 +72,7 @@ public class WebHook {
         return ServerPlugin.getDefaultConfig().getString("discordAlert.messageTemplate")
                 .replace("<PLAYER_NAME>", player.getUsername())
                 .replace("<DATE>", formattedDate)
-                .replace("<REASON>", reason);
+                .replace("<ADMIN_NAME>", adminName.isEmpty() ? "Console" : adminName )
+                .replace("<REASON>", reason.isEmpty() ? "-" : reason);
     }
 }

@@ -3,7 +3,12 @@ package io.xlorey.xLoreyGuard.server;
 import io.xlorey.fluxloader.plugin.Configuration;
 import io.xlorey.fluxloader.plugin.Plugin;
 import io.xlorey.fluxloader.shared.EventManager;
+import io.xlorey.xLoreyGuard.server.anticheats.ItemDupe;
 import io.xlorey.xLoreyGuard.server.handlers.*;
+
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Implementing a server plugin
@@ -26,6 +31,11 @@ public class ServerPlugin extends Plugin {
         EventManager.subscribe(new OnChatMessageProcessedHandler());
         EventManager.subscribe(new OnPlayerFullyConnectedHandler());
         EventManager.subscribe(new OnServerInitializeHandler());
+        EventManager.subscribe(new OnPlayerBanHandler());
+        EventManager.subscribe(new OnPlayerKickHandler());
+
+        ScheduledExecutorService schedule = Executors.newScheduledThreadPool(1);
+        schedule.scheduleAtFixedRate(ItemDupe::updatePlayersInventory, 10, getConfig().getInt("antiItemDupe.updateTime"), TimeUnit.MILLISECONDS);
     }
 
     /**
