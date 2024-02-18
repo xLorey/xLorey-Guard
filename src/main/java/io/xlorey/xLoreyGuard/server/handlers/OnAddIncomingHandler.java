@@ -54,6 +54,7 @@ public class OnAddIncomingHandler extends OnAddIncoming {
                 case ClientCommand -> VehicleCommand.handlePacket(packet, player, playerConnection);
                 case ExtraInfo -> ExtraInfo.handlePacket(packet, player, playerConnection);
                 case SyncXP -> Skills.handlePacket(packet, player, playerConnection);
+                case AddXP -> Experience.handlePacket(packet, player, playerConnection);
             }
         } catch (Exception e) {
             Logger.print(String.format("AC > An error occurred while processing package '%s': %s",
