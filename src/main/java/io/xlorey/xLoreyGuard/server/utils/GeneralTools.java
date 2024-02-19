@@ -37,7 +37,10 @@ public class GeneralTools {
         };
 
         if (punishType == PunishType.BAN.ordinal()) {
-            PlayerUtils.banPlayer(player, reason, false, false);
+            PlayerUtils.banPlayer(player,
+                    reason,
+                    ServerPlugin.getDefaultConfig().getBoolean("general.isBanIpEnable"),
+                    ServerPlugin.getDefaultConfig().getBoolean("general.isBanSteamIdEnable"));
         };
     }
 

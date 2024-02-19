@@ -2,6 +2,10 @@
 general:
   # Do you need to log incoming client commands from LUA?
   isLogClientCommand: false
+  # Do you need to additionally block the IP when blocking?
+  isBanIpEnable: false
+  # Do you need to additionally block SteamID (if a license) when blocking?
+  isBanSteamIdEnable: false
   # Nicknames of players on whom the anti-cheat will not work (white list)
   whiteListUsername:
     - admin
@@ -105,6 +109,7 @@ antiBrushTool:
     - "floor"
     - "damaged"
     - "carpentry"
+    - "fishingnet"
 # Anti-cheat that prevents the use of Vehicle Cheat
 vehicleAntiCheat:
   # Status of this anti-cheat: enabled or disabled
@@ -158,7 +163,7 @@ antiVPN:
   #  1 - only logging,
   #  2 - kick from the server + logging,
   #  3 - blocking by IP/SteamID + logging).
-  punishType: 1
+  punishType: 2
   # API key from the 'iphub.info' service
   API: "MjMwNDU6YklIeGRQcWZnbmdJcVBpNTluOTFsMGpkd21wTUtRbU8="
 # Anti-cheat that prevents the use of Item Dupe
