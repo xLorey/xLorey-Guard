@@ -1,5 +1,6 @@
 # General settings for all anti-cheats
 general:
+  # Do you need to log incoming client commands from LUA?
   isLogClientCommand: true
   # Nicknames of players on whom the anti-cheat will not work (white list)
   whiteListUsername:
@@ -173,7 +174,7 @@ antiItemDupe:
   updateTime: 7000
   # List of prohibited identifiers (partial or complete)
   blackList:
-    - "pipe"
+    - "molotov"
     - "bomb"
     - "aerosol"
     - "flametrap"
@@ -183,6 +184,24 @@ antiItemDupe:
   # Format list: "ID:COUNT"
   maxCountItems:
     - "Base.Katana:3"
+    - "Base.Machete:5"
     - "Base.Pencil:50"
+    - "Base.Pen:50"
+    - "Base.RedPen:50"
+    - "Base.BluePen:50"
     - "Base.Log:100"
     - "Base.Plank:100"
+    - "Base.AssaultRifle2:5"
+    - "Base.AssaultRifle:5"
+    - "Base.VarmintRifle:5"
+    - "Base.HuntingRifle:5"
+    - "Base.DoubleBarrelShotgun:5"
+    - "Base.DoubleBarrelShotgunSawnoff:5"
+    - "Base.Shotgun:5"
+    - "Base.ShotgunSawnoff:5"
+    - "Base.Pistol3:5"
+    - "Base.Pistol2:5"
+    - "Base.Revolver_Short:5"
+    - "Base.Revolver:5"
+    - "Base.Pistol:5"
+    - "Base.Revolver_Long:5"
