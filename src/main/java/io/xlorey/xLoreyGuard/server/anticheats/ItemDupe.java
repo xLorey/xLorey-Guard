@@ -1,18 +1,34 @@
 package io.xlorey.xLoreyGuard.server.anticheats;
 
+import io.xlorey.fluxloader.utils.Logger;
 import io.xlorey.xLoreyGuard.server.ServerPlugin;
 import io.xlorey.xLoreyGuard.server.utils.GeneralTools;
 import io.xlorey.xLoreyGuard.server.utils.InventoryTools;
+import zombie.Lua.LuaEventManager;
+import zombie.MapCollisionData;
 import zombie.characters.IsoPlayer;
+import zombie.core.logger.LoggerManager;
+import zombie.core.network.ByteBufferWriter;
 import zombie.core.raknet.UdpConnection;
+import zombie.debug.DebugLog;
+import zombie.debug.DebugType;
 import zombie.inventory.InventoryItem;
 import zombie.inventory.ItemContainer;
-import zombie.network.GameServer;
-import zombie.network.ZomboidNetData;
+import zombie.iso.IsoGridSquare;
+import zombie.iso.IsoObject;
+import zombie.iso.IsoWorld;
+import zombie.iso.areas.isoregion.IsoRegions;
+import zombie.iso.objects.IsoGenerator;
+import zombie.iso.objects.IsoWorldInventoryObject;
+import zombie.network.*;
+import zombie.vehicles.PolygonalMap2;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Author: Deknil
@@ -23,7 +39,7 @@ import java.util.HashMap;
  */
 public class ItemDupe {
     /**
-     * Performing anti-cheat actions when receiving a new packet
+     * Performing anti-cheat actions when receiving a new packet update Inventory
      * @param packet           received packet from the player
      * @param player           player object
      * @param playerConnection active player connection
@@ -95,8 +111,6 @@ public class ItemDupe {
      * Requesting inventory from players
      */
     public static void updatePlayersInventory() {
-        if (!ServerPlugin.getDefaultConfig().getBoolean("antiItemDupe.isEnable")) return;
-
         if (GameServer.udpEngine == null) return;
 
         ArrayList<IsoPlayer> players = GameServer.getPlayers();
@@ -108,5 +122,18 @@ public class ItemDupe {
 
             InventoryTools.requestPlayerInventory(playerConnection);
         }
+    }
+
+    /**
+     * Initializing periodic updating of players' inventory (synchronization)
+     */
+    public static void initInventoryUpdate() {
+        if (!ServerPlugin.getDefaultConfig().getBoolean("antiItemDupe.isEnable")) return;
+
+        ScheduledExecutorService schedule = Executors.newScheduledThreadPool(1);
+        schedule.scheduleAtFixedRate(ItemDupe::updatePlayersInventory,
+                10,
+                ServerPlugin.getDefaultConfig().getInt("antiItemDupe.updateTime"),
+                TimeUnit.MILLISECONDS);
     }
 }

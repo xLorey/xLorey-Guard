@@ -33,9 +33,6 @@ public class ServerPlugin extends Plugin {
         EventManager.subscribe(new OnServerInitializeHandler());
         EventManager.subscribe(new OnPlayerBanHandler());
         EventManager.subscribe(new OnPlayerKickHandler());
-
-        ScheduledExecutorService schedule = Executors.newScheduledThreadPool(1);
-        schedule.scheduleAtFixedRate(ItemDupe::updatePlayersInventory, 10, getConfig().getInt("antiItemDupe.updateTime"), TimeUnit.MILLISECONDS);
     }
 
     /**

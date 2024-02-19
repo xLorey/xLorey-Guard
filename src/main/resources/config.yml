@@ -110,6 +110,7 @@ antiBrushTool:
     - "damaged"
     - "carpentry"
     - "fishingnet"
+    - "invisible"
 # Anti-cheat that prevents the use of Vehicle Cheat
 vehicleAntiCheat:
   # Status of this anti-cheat: enabled or disabled

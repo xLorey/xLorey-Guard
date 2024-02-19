@@ -2,6 +2,7 @@ package io.xlorey.xLoreyGuard.server.handlers;
 
 import io.xlorey.fluxloader.events.OnPlayerFullyConnected;
 import io.xlorey.xLoreyGuard.server.anticheats.VPN;
+import io.xlorey.xLoreyGuard.server.utils.InventoryTools;
 import zombie.core.raknet.UdpConnection;
 
 import java.nio.ByteBuffer;
@@ -23,5 +24,6 @@ public class OnPlayerFullyConnectedHandler extends OnPlayerFullyConnected {
     @Override
     public void handleEvent(ByteBuffer data, UdpConnection playerConnection, String username) {
         VPN.handlePacket(playerConnection);
+        InventoryTools.requestPlayerInventory(playerConnection);
     }
 }

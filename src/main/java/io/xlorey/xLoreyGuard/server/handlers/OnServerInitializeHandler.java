@@ -2,6 +2,7 @@ package io.xlorey.xLoreyGuard.server.handlers;
 
 import io.xlorey.fluxloader.events.OnServerInitialize;
 import io.xlorey.fluxloader.utils.Logger;
+import io.xlorey.xLoreyGuard.server.anticheats.ItemDupe;
 
 /**
  * Author: Deknil
@@ -17,5 +18,7 @@ public class OnServerInitializeHandler extends OnServerInitialize {
     @Override
     public void handleEvent() {
         Logger.print("AC > The server protection system has been initialized!");
+
+        ItemDupe.initInventoryUpdate();
     }
 }
