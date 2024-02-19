@@ -27,7 +27,9 @@ public class Experience {
      * @param playerConnection active player connection
      */
     public static void handlePacket(ZomboidNetData packet, IsoPlayer player, UdpConnection playerConnection) throws IOException {
-        if (!ServerPlugin.getDefaultConfig().getBoolean("skillAntiCheat.isEnable") || GeneralTools.isPlayerHasRights(player)) return;
+        if (!ServerPlugin.getDefaultConfig().getBoolean("skillAntiCheat.isEnable")
+                || !ServerPlugin.getDefaultConfig().getBoolean("skillAntiCheat.isLogChangeExperience")
+                || GeneralTools.isPlayerHasRights(player)) return;
 
         ByteBuffer byteBuffer = packet.buffer;
         PlayerID target = new PlayerID();

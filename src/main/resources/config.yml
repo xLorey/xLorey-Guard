@@ -1,7 +1,7 @@
 # General settings for all anti-cheats
 general:
   # Do you need to log incoming client commands from LUA?
-  isLogClientCommand: true
+  isLogClientCommand: false
   # Nicknames of players on whom the anti-cheat will not work (white list)
   whiteListUsername:
     - admin
@@ -145,6 +145,8 @@ skillAntiCheat:
   maxLevel: 7
   # Minimum time (in-game) after which a player can level up above the specified level
   minHours: 24
+  # Do you need to log changes in player experience?
+  isLogChangeExperience: false
 # Anti VPN in all its glory
 antiVPN:
   # Status of this anti-cheat: enabled or disabled
